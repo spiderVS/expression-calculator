@@ -46,12 +46,13 @@ function expressionCalculator(expr) {
       }
       stack.pop();
     } else if ((inputArr[i] === '+') || (inputArr[i] === '-') || (inputArr[i] === '*') || (inputArr[i] === '/')) {
-        if (operPriortity[[stack[stack.length - 1]]] >= operPriortity[inputArr[i]]) exprToRpn.push(stack.pop());
+        while (operPriortity[[stack[stack.length - 1]]] >= operPriortity[inputArr[i]]) exprToRpn.push(stack.pop());
         stack.push(inputArr[i]);
       }
   }
 
   while (stack.length > 0) exprToRpn.push(stack.pop());
+  if (exprToRpn.includes('(')) throw new Error ('ExpressionError: Brackets must be paired');
 
   // console.log(exprToRpn);
 
