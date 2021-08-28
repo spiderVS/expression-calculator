@@ -59,6 +59,7 @@ function expressionCalculator(expr) {
     if (typeof(exprToRpn[i]) == 'number') stack.push(exprToRpn[i]);
     else {
       stack.push(operations[exprToRpn[i]](stack.pop(), stack.pop()));
+      if (stack[stack.length - 1] === Infinity) throw new Error('TypeError: Division by zero.');
     }
     // console.log(stack);
   }
