@@ -21,7 +21,7 @@ function expressionCalculator(expr) {
 
   let inputArr = expr.split('').filter(el => el != ' ');
 
-  // console.log(inputArr);
+  // console.log('Входной массив:', inputArr);
 
   for (let i = 1; i < inputArr.length; i++) {
     if ((+inputArr[i] >= 0) && (+inputArr[i-1]>=0)) {
@@ -31,7 +31,7 @@ function expressionCalculator(expr) {
     }
   }
 
-  // console.log(inputArr);
+  // console.log('Входной массив после склейки цифр, если числа содержат более одной цифры:', inputArr);
 
   let exprToRpn = [];
   let stack = [];
@@ -54,7 +54,7 @@ function expressionCalculator(expr) {
   while (stack.length > 0) exprToRpn.push(stack.pop());
   if (exprToRpn.includes('(')) throw new Error ('ExpressionError: Brackets must be paired');
 
-  // console.log(exprToRpn);
+  // console.log('Массив, преобразованный в обратную польскую нотацию, готовый к вычислениям \n', exprToRpn);
 
   for (let i = 0; i < exprToRpn.length; i++) {
     if (typeof(exprToRpn[i]) == 'number') stack.push(exprToRpn[i]);
@@ -62,7 +62,6 @@ function expressionCalculator(expr) {
       stack.push(operations[exprToRpn[i]](stack.pop(), stack.pop()));
       if (stack[stack.length - 1] === Infinity) throw new Error('TypeError: Division by zero.');
     }
-    // console.log(stack);
   }
   return stack[0];
 }
